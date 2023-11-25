@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { QResizeObserver, QTable, QTableColumn, QTableProps } from 'quasar';
+import {
+  QResizeObserver,
+  QScrollAreaProps,
+  QTable,
+  QTableColumn,
+  QTableProps,
+} from 'quasar';
 
 const report = ref<{
   height: number;
@@ -178,6 +184,23 @@ onMounted(() => {
   // get initial data from server (1st page)
   tableRef.value?.requestServerInteraction();
 });
+
+const scrollAreaBindings: QScrollAreaProps = {
+  thumbStyle: {
+    right: '4px',
+    borderRadius: '5px',
+    backgroundColor: '#027be3',
+    width: '5px',
+    opacity: '0.75',
+  },
+  barStyle: {
+    right: '2px',
+    borderRadius: '9px',
+    backgroundColor: '#027be3',
+    width: '9px',
+    opacity: '0.2',
+  },
+};
 </script>
 <template>
   <q-page padding>
@@ -188,14 +211,16 @@ onMounted(() => {
       after-class="after-b"
     >
       <template v-slot:before>
-        <div class="q-pa-md">
-          <div class="text-h4 q-mb-md">Before</div>
-          <div v-for="n in 20" :key="n" class="q-my-md">
-            {{ n }}. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Quis praesentium cumque magnam odio iure quidem, quod illum numquam
-            possimus obcaecati commodi minima assumenda consectetur culpa fuga
-            nulla ullam. In, libero.
-          </div>
+        <div class="q-pa-md column full-height">
+          <q-scroll-area class="col" v-bind="scrollAreaBindings">
+            <div class="text-h4 q-mb-md">Before</div>
+            <div v-for="n in 20" :key="n" class="q-my-md">
+              {{ n }}. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Quis praesentium cumque magnam odio iure quidem, quod illum
+              numquam possimus obcaecati commodi minima assumenda consectetur
+              culpa fuga nulla ullam. In, libero.
+            </div>
+          </q-scroll-area>
         </div>
       </template>
 
