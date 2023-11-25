@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QResizeObserver, QTableColumn, QTableProps } from 'quasar';
+import { QResizeObserver, QTable, QTableColumn, QTableProps } from 'quasar';
 
 const report = ref<{
   height: number;
@@ -76,7 +76,7 @@ import { ref, onMounted } from 'vue';
 
 const splitterModel = ref(50);
 
-const tableRef = ref();
+const tableRef = ref<QTable | null>(null);
 const rows = ref<Row[]>([]);
 const filter = ref('');
 const loading = ref(false);
@@ -176,7 +176,7 @@ const onRequest: QTableProps['onRequest'] = (props) => {
 
 onMounted(() => {
   // get initial data from server (1st page)
-  tableRef.value.requestServerInteraction();
+  tableRef.value?.requestServerInteraction();
 });
 </script>
 <template>
