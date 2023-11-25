@@ -1,67 +1,3 @@
-<template>
-  <q-page padding>
-    <q-splitter
-      v-model="splitterModel"
-      horizontal
-      style="height: 87vh"
-      after-class="after-b"
-    >
-      <template v-slot:before>
-        <div class="q-pa-md">
-          <div class="text-h4 q-mb-md">Before</div>
-          <div v-for="n in 20" :key="n" class="q-my-md">
-            {{ n }}. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Quis praesentium cumque magnam odio iure quidem, quod illum numquam
-            possimus obcaecati commodi minima assumenda consectetur culpa fuga
-            nulla ullam. In, libero.
-          </div>
-        </div>
-      </template>
-
-      <template v-slot:after>
-        <div class="q-pa-md">
-          <q-table
-            flat
-            bordered
-            style="height: 300px"
-            ref="tableRef"
-            title="Treats"
-            :rows="rows"
-            :columns="columns"
-            row-key="id"
-            v-model:pagination="pagination"
-            :loading="loading"
-            :filter="filter"
-            binary-state-sort
-            @request="onRequest"
-            :style="report ? `max-height:${report.height - 32}px` : void 0"
-          >
-            <template v-slot:top-right>
-              <q-input
-                borderless
-                dense
-                debounce="300"
-                v-model="filter"
-                placeholder="Search"
-              >
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
-            </template>
-          </q-table>
-        </div>
-        <q-resize-observer @resize="onResize" />
-      </template>
-    </q-splitter>
-    <div v-if="report" class="q-gutter-sm">
-      Reported:
-      <q-badge>width: {{ report.width }}</q-badge>
-      <q-badge>height: {{ report.height }}</q-badge>
-    </div>
-  </q-page>
-</template>
-
 <script setup lang="ts">
 import { QResizeObserver, QTableColumn, QTableProps } from 'quasar';
 
@@ -243,6 +179,69 @@ onMounted(() => {
   tableRef.value.requestServerInteraction();
 });
 </script>
+<template>
+  <q-page padding>
+    <q-splitter
+      v-model="splitterModel"
+      horizontal
+      style="height: 87vh"
+      after-class="after-b"
+    >
+      <template v-slot:before>
+        <div class="q-pa-md">
+          <div class="text-h4 q-mb-md">Before</div>
+          <div v-for="n in 20" :key="n" class="q-my-md">
+            {{ n }}. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Quis praesentium cumque magnam odio iure quidem, quod illum numquam
+            possimus obcaecati commodi minima assumenda consectetur culpa fuga
+            nulla ullam. In, libero.
+          </div>
+        </div>
+      </template>
+
+      <template v-slot:after>
+        <div class="q-pa-md">
+          <q-table
+            flat
+            bordered
+            style="height: 300px"
+            ref="tableRef"
+            title="Treats"
+            :rows="rows"
+            :columns="columns"
+            row-key="id"
+            v-model:pagination="pagination"
+            :loading="loading"
+            :filter="filter"
+            binary-state-sort
+            @request="onRequest"
+            :style="report ? `max-height:${report.height - 32}px` : void 0"
+          >
+            <template v-slot:top-right>
+              <q-input
+                borderless
+                dense
+                debounce="300"
+                v-model="filter"
+                placeholder="Search"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+          </q-table>
+        </div>
+        <q-resize-observer @resize="onResize" />
+      </template>
+    </q-splitter>
+    <div v-if="report" class="q-gutter-sm">
+      Reported:
+      <q-badge>width: {{ report.width }}</q-badge>
+      <q-badge>height: {{ report.height }}</q-badge>
+    </div>
+  </q-page>
+</template>
 
 <style lang="scss" scoped>
 :deep(.after-b) {
