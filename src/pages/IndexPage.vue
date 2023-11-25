@@ -245,6 +245,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 :deep(.after-b) {
-  overflow-y: hidden !important;
+  overflow-y: hidden;
 }
 </style>
