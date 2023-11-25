@@ -1,6 +1,11 @@
 <template>
   <q-page padding>
-    <q-splitter v-model="splitterModel" horizontal style="height: 87vh">
+    <q-splitter
+      v-model="splitterModel"
+      horizontal
+      style="height: 87vh"
+      after-class="after-b"
+    >
       <template v-slot:before>
         <div class="q-pa-md">
           <div class="text-h4 q-mb-md">Before</div>
@@ -29,7 +34,7 @@
             :filter="filter"
             binary-state-sort
             @request="onRequest"
-            :style="report ? `max-height:${report.height - 10}px` : void 0"
+            :style="report ? `max-height:${report.height - 32}px` : void 0"
           >
             <template v-slot:top-right>
               <q-input
@@ -239,4 +244,8 @@ onMounted(() => {
 });
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped>
+:deep(.after-b) {
+  overflow-y: hidden !important;
+}
+</style>
